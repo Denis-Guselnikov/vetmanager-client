@@ -58,7 +58,7 @@
             this.btnClose.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnClose.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.btnClose.ForeColor = System.Drawing.Color.Black;
-            this.btnClose.Location = new System.Drawing.Point(832, 2);
+            this.btnClose.Location = new System.Drawing.Point(834, 2);
             this.btnClose.Name = "btnClose";
             this.btnClose.Size = new System.Drawing.Size(30, 30);
             this.btnClose.TabIndex = 0;
@@ -74,7 +74,7 @@
             this.btnMaximize.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnMaximize.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.btnMaximize.ForeColor = System.Drawing.Color.Black;
-            this.btnMaximize.Location = new System.Drawing.Point(796, 2);
+            this.btnMaximize.Location = new System.Drawing.Point(798, 2);
             this.btnMaximize.Name = "btnMaximize";
             this.btnMaximize.Size = new System.Drawing.Size(30, 30);
             this.btnMaximize.TabIndex = 1;
@@ -89,7 +89,7 @@
             this.btnMinimize.FlatAppearance.BorderSize = 0;
             this.btnMinimize.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnMinimize.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.btnMinimize.Location = new System.Drawing.Point(760, 2);
+            this.btnMinimize.Location = new System.Drawing.Point(762, 2);
             this.btnMinimize.Name = "btnMinimize";
             this.btnMinimize.Size = new System.Drawing.Size(30, 30);
             this.btnMinimize.TabIndex = 2;
@@ -105,7 +105,7 @@
             this.panelTopLine.Font = new System.Drawing.Font("Microsoft Sans Serif", 3F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.panelTopLine.Location = new System.Drawing.Point(0, 33);
             this.panelTopLine.Name = "panelTopLine";
-            this.panelTopLine.Size = new System.Drawing.Size(862, 2);
+            this.panelTopLine.Size = new System.Drawing.Size(864, 2);
             this.panelTopLine.TabIndex = 3;
             // 
             // labelClient
@@ -138,6 +138,7 @@
             this.btnSettingsApi.TabIndex = 6;
             this.btnSettingsApi.Text = "Настройки API";
             this.btnSettingsApi.UseVisualStyleBackColor = true;
+            this.btnSettingsApi.Click += new System.EventHandler(this.btnSettingsApi_Click);
             // 
             // labelPetsByClient
             // 
@@ -183,6 +184,7 @@
             // 
             // mainDataGridView
             // 
+            this.mainDataGridView.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.mainDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.mainDataGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.colId,
@@ -201,36 +203,42 @@
             // 
             // colId
             // 
+            this.colId.FillWeight = 50F;
             this.colId.HeaderText = "#";
             this.colId.Name = "colId";
             this.colId.ReadOnly = true;
             // 
             // colName
             // 
+            this.colName.FillWeight = 89.54315F;
             this.colName.HeaderText = "Кличка";
             this.colName.Name = "colName";
             this.colName.ReadOnly = true;
             // 
             // colPetType
             // 
+            this.colPetType.FillWeight = 89.54315F;
             this.colPetType.HeaderText = "Вид";
             this.colPetType.Name = "colPetType";
             this.colPetType.ReadOnly = true;
             // 
             // colBreed
             // 
+            this.colBreed.FillWeight = 89.54315F;
             this.colBreed.HeaderText = "Порода";
             this.colBreed.Name = "colBreed";
             this.colBreed.ReadOnly = true;
             // 
             // colGender
             // 
+            this.colGender.FillWeight = 89.54315F;
             this.colGender.HeaderText = "Пол";
             this.colGender.Name = "colGender";
             this.colGender.ReadOnly = true;
             // 
             // colBirthdate
             // 
+            this.colBirthdate.FillWeight = 89.54315F;
             this.colBirthdate.HeaderText = "Дата рождения";
             this.colBirthdate.Name = "colBirthdate";
             this.colBirthdate.ReadOnly = true;
@@ -240,7 +248,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(863, 524);
+            this.ClientSize = new System.Drawing.Size(865, 534);
             this.Controls.Add(this.mainDataGridView);
             this.Controls.Add(this.btnDelPet);
             this.Controls.Add(this.btnEditPet);
@@ -258,6 +266,7 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "MainForm";
             this.Load += new System.EventHandler(this.MainForm_Load);
+            this.MouseDown += new System.Windows.Forms.MouseEventHandler(this.MainForm_MouseDown);
             ((System.ComponentModel.ISupportInitialize)(this.mainDataGridView)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
