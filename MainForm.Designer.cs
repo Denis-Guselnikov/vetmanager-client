@@ -28,9 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.btnClose = new System.Windows.Forms.Button();
-            this.btnMaximize = new System.Windows.Forms.Button();
-            this.btnMinimize = new System.Windows.Forms.Button();
             this.panelTopLine = new System.Windows.Forms.Panel();
             this.labelClient = new System.Windows.Forms.Label();
             this.comboClients = new System.Windows.Forms.ComboBox();
@@ -49,61 +46,13 @@
             ((System.ComponentModel.ISupportInitialize)(this.mainDataGridView)).BeginInit();
             this.SuspendLayout();
             // 
-            // btnClose
-            // 
-            this.btnClose.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnClose.BackColor = System.Drawing.Color.White;
-            this.btnClose.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnClose.FlatAppearance.BorderSize = 0;
-            this.btnClose.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnClose.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.btnClose.ForeColor = System.Drawing.Color.Black;
-            this.btnClose.Location = new System.Drawing.Point(834, 2);
-            this.btnClose.Name = "btnClose";
-            this.btnClose.Size = new System.Drawing.Size(30, 30);
-            this.btnClose.TabIndex = 0;
-            this.btnClose.Text = "X";
-            this.btnClose.UseVisualStyleBackColor = false;
-            this.btnClose.Click += new System.EventHandler(this.btnClose_Click);
-            // 
-            // btnMaximize
-            // 
-            this.btnMaximize.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnMaximize.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnMaximize.FlatAppearance.BorderSize = 0;
-            this.btnMaximize.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnMaximize.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.btnMaximize.ForeColor = System.Drawing.Color.Black;
-            this.btnMaximize.Location = new System.Drawing.Point(798, 2);
-            this.btnMaximize.Name = "btnMaximize";
-            this.btnMaximize.Size = new System.Drawing.Size(30, 30);
-            this.btnMaximize.TabIndex = 1;
-            this.btnMaximize.Text = "☐\r\n";
-            this.btnMaximize.UseVisualStyleBackColor = true;
-            this.btnMaximize.Click += new System.EventHandler(this.btnMaximize_Click);
-            // 
-            // btnMinimize
-            // 
-            this.btnMinimize.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnMinimize.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnMinimize.FlatAppearance.BorderSize = 0;
-            this.btnMinimize.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnMinimize.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.btnMinimize.Location = new System.Drawing.Point(762, 2);
-            this.btnMinimize.Name = "btnMinimize";
-            this.btnMinimize.Size = new System.Drawing.Size(30, 30);
-            this.btnMinimize.TabIndex = 2;
-            this.btnMinimize.Text = "_";
-            this.btnMinimize.UseVisualStyleBackColor = true;
-            this.btnMinimize.Click += new System.EventHandler(this.btnMinimize_Click);
-            // 
             // panelTopLine
             // 
             this.panelTopLine.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.panelTopLine.BackColor = System.Drawing.Color.Black;
             this.panelTopLine.Font = new System.Drawing.Font("Microsoft Sans Serif", 3F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.panelTopLine.Location = new System.Drawing.Point(0, 33);
+            this.panelTopLine.Location = new System.Drawing.Point(0, 1);
             this.panelTopLine.Name = "panelTopLine";
             this.panelTopLine.Size = new System.Drawing.Size(864, 2);
             this.panelTopLine.TabIndex = 3;
@@ -112,7 +61,7 @@
             // 
             this.labelClient.AutoSize = true;
             this.labelClient.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.labelClient.Location = new System.Drawing.Point(12, 62);
+            this.labelClient.Location = new System.Drawing.Point(12, 26);
             this.labelClient.Name = "labelClient";
             this.labelClient.Size = new System.Drawing.Size(93, 24);
             this.labelClient.TabIndex = 4;
@@ -123,7 +72,7 @@
             this.comboClients.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboClients.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.comboClients.FormattingEnabled = true;
-            this.comboClients.Location = new System.Drawing.Point(111, 59);
+            this.comboClients.Location = new System.Drawing.Point(111, 18);
             this.comboClients.Name = "comboClients";
             this.comboClients.Size = new System.Drawing.Size(166, 32);
             this.comboClients.TabIndex = 5;
@@ -132,7 +81,7 @@
             // 
             this.btnSettingsApi.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnSettingsApi.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.btnSettingsApi.Location = new System.Drawing.Point(648, 59);
+            this.btnSettingsApi.Location = new System.Drawing.Point(652, 22);
             this.btnSettingsApi.Name = "btnSettingsApi";
             this.btnSettingsApi.Size = new System.Drawing.Size(192, 32);
             this.btnSettingsApi.TabIndex = 6;
@@ -258,15 +207,10 @@
             this.Controls.Add(this.comboClients);
             this.Controls.Add(this.labelClient);
             this.Controls.Add(this.panelTopLine);
-            this.Controls.Add(this.btnMinimize);
-            this.Controls.Add(this.btnMaximize);
-            this.Controls.Add(this.btnClose);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "MainForm";
+            this.ShowIcon = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "MainForm";
             this.Load += new System.EventHandler(this.MainForm_Load);
-            this.MouseDown += new System.Windows.Forms.MouseEventHandler(this.MainForm_MouseDown);
             ((System.ComponentModel.ISupportInitialize)(this.mainDataGridView)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -274,10 +218,6 @@
         }
 
         #endregion
-
-        private System.Windows.Forms.Button btnClose;
-        private System.Windows.Forms.Button btnMaximize;
-        private System.Windows.Forms.Button btnMinimize;
         private System.Windows.Forms.Panel panelTopLine;
         private System.Windows.Forms.Label labelClient;
         private System.Windows.Forms.ComboBox comboClients;
