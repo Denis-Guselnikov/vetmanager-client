@@ -87,6 +87,8 @@ namespace lesson
 
                 string filePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "settings.xml");
                 settings.Save(filePath);
+                this.DialogResult = DialogResult.OK;
+                this.Close();
             }
             catch (Exception ex)
             {

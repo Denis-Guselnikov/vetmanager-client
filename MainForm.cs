@@ -1,13 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using lesson.helpers;
+using lesson.response;
+using System;
+using System.Net.Http;
+using System.Text.Json;
 using System.Windows.Forms;
-using System.Runtime.InteropServices;
 
 namespace lesson
 {
@@ -23,10 +19,46 @@ namespace lesson
             mainDataGridView.Rows.Add(4);
         }
 
-        private void btnSettingsApi_Click(object sender, EventArgs e)
+        private async void btnSettingsApi_Click(object sender, EventArgs e)
         {
             SettingsForm settingsForm = new SettingsForm();
-            settingsForm.ShowDialog();
+
+            if (settingsForm.ShowDialog() == DialogResult.OK)
+            {
+                MessageBox.Show("Данные сохранены");
+
+                AppSettings settigs = new AppSettings().LoadSettingFromXml();
+
+                string url = $"https://{settigs.Domain}.vetmanager2.ru/rest/api/client";
+                var client = CreateClient(settigs);
+
+                try
+                {
+                    HttpResponseMessage response = await client.GetAsync(url);
+                    string result = await response.Content.ReadAsStringAsync();
+
+                    if (!response.IsSuccessStatusCode)
+                    {
+                        MessageBox.Show("Ошибка получения клиентов!", "Ошибка");
+                        return;
+                    }
+
+                    var clientResponse = JsonSerializer.Deserialize<ClientResponseData>(result);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                }
+            }
+
+        }
+
+        private HttpClient CreateClient(AppSettings settings)
+        {
+            var client = new HttpClient();
+            client.DefaultRequestHeaders.Add("X-APP-NAME", settings.Service);
+            client.DefaultRequestHeaders.Add("X-USER-TOKEN", settings.Token);
+            return client;
         }
     }
 }

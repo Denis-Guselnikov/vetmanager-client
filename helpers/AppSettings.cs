@@ -1,0 +1,36 @@
+﻿using System;
+using System.IO;
+using System.Windows.Forms;
+using System.Xml.Linq;
+
+namespace lesson.helpers
+{
+    internal class AppSettings
+    {
+        public string Domain { get; set; }
+        public string Service { get; set; }
+        public string Token { get; set; }
+        public string UserId { get; set; }
+
+        public AppSettings LoadSettingFromXml()
+        {
+            string filePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "settings.xml");
+
+            if (!File.Exists(filePath))
+            {
+                MessageBox.Show($"Файл настроек не найден: {filePath}");
+            }
+
+            XElement root = XElement.Load(filePath);
+
+            return new AppSettings
+            {
+                Domain = root.Element("Domain")?.Value,
+                Service = root.Element("Service")?.Value,
+                Token = root.Element("Token")?.Value,
+                UserId = root.Element("UserId")?.Value
+            };
+
+        }
+    }
+}

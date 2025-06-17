@@ -52,7 +52,7 @@
             this.settingPanel.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.settingPanel.Location = new System.Drawing.Point(12, 12);
             this.settingPanel.Name = "settingPanel";
-            this.settingPanel.Size = new System.Drawing.Size(731, 315);
+            this.settingPanel.Size = new System.Drawing.Size(691, 292);
             this.settingPanel.TabIndex = 1;
             // 
             // settingsLabelDomain
@@ -70,9 +70,9 @@
             this.btnConnect.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.btnConnect.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnConnect.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.btnConnect.Location = new System.Drawing.Point(279, 234);
+            this.btnConnect.Location = new System.Drawing.Point(279, 223);
             this.btnConnect.Name = "btnConnect";
-            this.btnConnect.Size = new System.Drawing.Size(183, 36);
+            this.btnConnect.Size = new System.Drawing.Size(143, 36);
             this.btnConnect.TabIndex = 6;
             this.btnConnect.Text = "Подключение";
             this.btnConnect.UseVisualStyleBackColor = true;
@@ -127,7 +127,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(755, 339);
+            this.ClientSize = new System.Drawing.Size(715, 316);
             this.Controls.Add(this.settingPanel);
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.Name = "SettingsForm";
