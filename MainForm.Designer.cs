@@ -74,8 +74,9 @@
             this.comboClients.FormattingEnabled = true;
             this.comboClients.Location = new System.Drawing.Point(111, 18);
             this.comboClients.Name = "comboClients";
-            this.comboClients.Size = new System.Drawing.Size(166, 32);
+            this.comboClients.Size = new System.Drawing.Size(331, 32);
             this.comboClients.TabIndex = 5;
+            this.comboClients.SelectedIndexChanged += new System.EventHandler(this.comboClients_SelectedIndexChanged);
             // 
             // btnSettingsApi
             // 
@@ -113,7 +114,7 @@
             // btnEditPet
             // 
             this.btnEditPet.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnEditPet.Location = new System.Drawing.Point(455, 148);
+            this.btnEditPet.Location = new System.Drawing.Point(439, 120);
             this.btnEditPet.Name = "btnEditPet";
             this.btnEditPet.Size = new System.Drawing.Size(115, 25);
             this.btnEditPet.TabIndex = 9;

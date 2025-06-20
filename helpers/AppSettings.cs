@@ -18,7 +18,7 @@ namespace lesson.helpers
 
             if (!File.Exists(filePath))
             {
-                MessageBox.Show($"Файл настроек не найден: {filePath}");
+                return null;
             }
 
             XElement root = XElement.Load(filePath);
@@ -30,7 +30,6 @@ namespace lesson.helpers
                 Token = root.Element("Token")?.Value,
                 UserId = root.Element("UserId")?.Value
             };
-
         }
     }
 }
