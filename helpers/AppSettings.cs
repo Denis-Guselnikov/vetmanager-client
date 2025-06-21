@@ -1,4 +1,5 @@
-﻿using System;
+﻿using lesson.response;
+using System;
 using System.IO;
 using System.Windows.Forms;
 using System.Xml.Linq;
@@ -30,6 +31,26 @@ namespace lesson.helpers
                 Token = root.Element("Token")?.Value,
                 UserId = root.Element("UserId")?.Value
             };
+        }
+
+        public void SaveSettingsToXml(AuthData data, string domain)
+        {
+            try
+            {
+                var settings = new XElement("Settings",
+                    new XElement("Domain", domain),
+                    new XElement("Service", data.service),
+                    new XElement("Token", data.token),
+                    new XElement("UserId", data.user_id)
+                );
+
+                string filePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "settings.xml");
+                settings.Save(filePath);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Ошибка при сохранении: {ex.Message}");
+            }
         }
     }
 }

@@ -5,11 +5,15 @@ using System.Net.Http;
 using System.Text.Json;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace lesson
 {
     public partial class MainForm : Form
     {
+        private List<Client> clients;
+
         public MainForm()
         {
             InitializeComponent();
@@ -36,14 +40,13 @@ namespace lesson
                 AppSettings settigs = new AppSettings().LoadSettingFromXml();
                 await LoadClientsAsync(settigs);               
             }
-        }
+        }        
 
         private async Task LoadClientsAsync(AppSettings settings)
         {
             try
             {
-                string filter = Uri.EscapeDataString("[{\"property\":\"status\",\"value\":\"ACTIVE\",\"operator\":\"==\"}]");
-                string url = $"https://{settings.Domain}.vetmanager2.ru/rest/api/client?filter={filter}";
+                string url = $"https://{settings.Domain}.vetmanager2.ru/rest/api/client/clientsSearchData";
 
                 var client = CreateClient(settings);
 
@@ -60,14 +63,15 @@ namespace lesson
 
                 if (clientResponse.data.client != null)
                 {
+                    clients = clientResponse.data.client;
                     comboClients.Items.Clear();
 
-                    foreach (var row in clientResponse.data.client)
+                    foreach (var row in clients)
                     {
                         comboClients.Items.Add(new ComboBoxClient
                         {
                             text = $"{row.last_name} {row.first_name} {row.middle_name}".Trim(),
-                            value = row.id
+                            value = row.client_id
                         });
                     }
 
@@ -91,7 +95,39 @@ namespace lesson
 
         private void comboClients_SelectedIndexChanged(object sender, EventArgs e)
         {
-            MessageBox.Show("qweqwe");
+            mainDataGridView.Rows.Clear();
+
+            if (comboClients.SelectedItem is ComboBoxClient selectedClient)
+            {
+                int clientId = selectedClient.value;
+                var selected = clients.FirstOrDefault(clients => clients.client_id == clientId);
+
+                if (selected != null && selected.pets != null)
+                {
+                    foreach (var pet in selected.pets)
+                    {
+                        mainDataGridView.Rows.Add(
+                            pet.pet_id,
+                            pet.alias,
+                            pet.pet_type_title,
+                            pet.breed,
+                            pet.sex,
+                            pet.birthday
+                            );
+                    }
+
+                    btnAddPet.Enabled = true;
+                }
+            }
+        }
+
+        private void ComboClientsTextChanged(object sender, EventArgs e)
+        {
+            if (string.IsNullOrWhiteSpace(comboClients.Text))
+            {
+                mainDataGridView.Rows.Clear();
+                btnAddPet.Enabled = false;
+            }
         }
     }
 

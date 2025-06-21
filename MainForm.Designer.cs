@@ -69,7 +69,6 @@
             // 
             // comboClients
             // 
-            this.comboClients.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboClients.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.comboClients.FormattingEnabled = true;
             this.comboClients.Location = new System.Drawing.Point(111, 18);
@@ -77,6 +76,7 @@
             this.comboClients.Size = new System.Drawing.Size(331, 32);
             this.comboClients.TabIndex = 5;
             this.comboClients.SelectedIndexChanged += new System.EventHandler(this.comboClients_SelectedIndexChanged);
+            this.comboClients.TextChanged += new System.EventHandler(this.ComboClientsTextChanged);
             // 
             // btnSettingsApi
             // 
@@ -102,6 +102,7 @@
             // 
             // btnAddPet
             // 
+            this.btnAddPet.Enabled = false;
             this.btnAddPet.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnAddPet.Location = new System.Drawing.Point(303, 148);
             this.btnAddPet.Name = "btnAddPet";
@@ -114,7 +115,7 @@
             // btnEditPet
             // 
             this.btnEditPet.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnEditPet.Location = new System.Drawing.Point(439, 120);
+            this.btnEditPet.Location = new System.Drawing.Point(453, 148);
             this.btnEditPet.Name = "btnEditPet";
             this.btnEditPet.Size = new System.Drawing.Size(115, 25);
             this.btnEditPet.TabIndex = 9;
@@ -134,8 +135,9 @@
             // 
             // mainDataGridView
             // 
+            this.mainDataGridView.AllowUserToAddRows = false;
             this.mainDataGridView.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            this.mainDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.mainDataGridView.ColumnHeadersHeight = 40;
             this.mainDataGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.colId,
             this.colName,
@@ -148,6 +150,8 @@
             this.mainDataGridView.Name = "mainDataGridView";
             this.mainDataGridView.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
             this.mainDataGridView.RowHeadersVisible = false;
+            this.mainDataGridView.RowTemplate.Height = 40;
+            this.mainDataGridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.mainDataGridView.Size = new System.Drawing.Size(824, 320);
             this.mainDataGridView.TabIndex = 11;
             // 

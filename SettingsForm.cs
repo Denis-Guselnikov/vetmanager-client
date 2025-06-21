@@ -1,4 +1,5 @@
-﻿using lesson.response;
+﻿using lesson.helpers;
+using lesson.response;
 using System;
 using System.IO;
 using System.Net.Http;
@@ -78,15 +79,8 @@ namespace lesson
         {
             try
             {
-                var settings = new XElement("Settings",
-                    new XElement("Domain", domain),
-                    new XElement("Service", data.service),
-                    new XElement("Token", data.token),
-                    new XElement("UserId", data.user_id)
-                );
-
-                string filePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "settings.xml");
-                settings.Save(filePath);
+                AppSettings settings = new AppSettings();
+                settings.SaveSettingsToXml(data, domain);
                 this.DialogResult = DialogResult.OK;
                 this.Close();
             }
