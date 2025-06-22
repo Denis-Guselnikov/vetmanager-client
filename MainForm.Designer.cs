@@ -111,9 +111,11 @@
             this.btnAddPet.TabStop = false;
             this.btnAddPet.Text = "Добавить";
             this.btnAddPet.UseVisualStyleBackColor = true;
+            this.btnAddPet.Click += new System.EventHandler(this.btnAddPet_Click);
             // 
             // btnEditPet
             // 
+            this.btnEditPet.Enabled = false;
             this.btnEditPet.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnEditPet.Location = new System.Drawing.Point(453, 148);
             this.btnEditPet.Name = "btnEditPet";
@@ -125,6 +127,7 @@
             // 
             // btnDelPet
             // 
+            this.btnDelPet.Enabled = false;
             this.btnDelPet.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnDelPet.Location = new System.Drawing.Point(601, 148);
             this.btnDelPet.Name = "btnDelPet";
@@ -136,6 +139,7 @@
             // mainDataGridView
             // 
             this.mainDataGridView.AllowUserToAddRows = false;
+            this.mainDataGridView.AllowUserToResizeRows = false;
             this.mainDataGridView.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.mainDataGridView.ColumnHeadersHeight = 40;
             this.mainDataGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
@@ -151,9 +155,11 @@
             this.mainDataGridView.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
             this.mainDataGridView.RowHeadersVisible = false;
             this.mainDataGridView.RowTemplate.Height = 40;
+            this.mainDataGridView.RowTemplate.ReadOnly = true;
             this.mainDataGridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.mainDataGridView.Size = new System.Drawing.Size(824, 320);
             this.mainDataGridView.TabIndex = 11;
+            this.mainDataGridView.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.mainDataGridView_CellContentClick);
             // 
             // colId
             // 

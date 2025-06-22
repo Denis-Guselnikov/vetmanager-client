@@ -37,6 +37,7 @@ namespace lesson.response
         public object street_type { get; set; }
         public string clinic_phone_prefix { get; set; }
         public List<Pet> pets { get; set; }
+        public string fio => last_name + " " + first_name + " " + middle_name;
     }
 
     public class Pet

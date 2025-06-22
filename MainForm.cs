@@ -13,6 +13,7 @@ namespace lesson
     public partial class MainForm : Form
     {
         private List<Client> clients;
+        private AppSettings settings;
 
         public MainForm()
         {
@@ -21,11 +22,11 @@ namespace lesson
 
         private async void MainForm_Load(object sender, EventArgs e)
         {
-            var settings = new AppSettings().LoadSettingFromXml();
+            settings = new AppSettings().LoadSettingFromXml();
 
             if (settings != null)
             {
-                await LoadClientsAsync(settings);
+                await LoadClientsAsync();
             }          
         }
 
@@ -37,17 +38,16 @@ namespace lesson
             {
                 MessageBox.Show("Данные сохранены");
 
-                AppSettings settigs = new AppSettings().LoadSettingFromXml();
-                await LoadClientsAsync(settigs);               
+                settings = new AppSettings().LoadSettingFromXml();
+                await LoadClientsAsync();               
             }
         }        
 
-        private async Task LoadClientsAsync(AppSettings settings)
+        private async Task LoadClientsAsync()
         {
             try
             {
                 string url = $"https://{settings.Domain}.vetmanager2.ru/rest/api/client/clientsSearchData";
-
                 var client = CreateClient(settings);
 
                 HttpResponseMessage response = await client.GetAsync(url);
@@ -60,23 +60,14 @@ namespace lesson
                 }
 
                 var clientResponse = JsonSerializer.Deserialize<ClientResponseData>(result);
+                clients = clientResponse.data.client;
 
-                if (clientResponse.data.client != null)
+                if (clients != null)
                 {
-                    clients = clientResponse.data.client;
-                    comboClients.Items.Clear();
-
-                    foreach (var row in clients)
-                    {
-                        comboClients.Items.Add(new ComboBoxClient
-                        {
-                            text = $"{row.last_name} {row.first_name} {row.middle_name}".Trim(),
-                            value = row.client_id
-                        });
-                    }
-
-                    comboClients.DisplayMember = "text";
-                    comboClients.ValueMember = "value";
+                    comboClients.DataSource = null;
+                    comboClients.DataSource = clients;
+                    comboClients.DisplayMember = "fio";
+                    comboClients.ValueMember = "client_id";
                 }
             }
             catch (Exception ex)
@@ -97,9 +88,9 @@ namespace lesson
         {
             mainDataGridView.Rows.Clear();
 
-            if (comboClients.SelectedItem is ComboBoxClient selectedClient)
+            if (comboClients.SelectedItem is Client selectedClient)
             {
-                int clientId = selectedClient.value;
+                int clientId = selectedClient.client_id;
                 var selected = clients.FirstOrDefault(clients => clients.client_id == clientId);
 
                 if (selected != null && selected.pets != null)
@@ -127,13 +118,28 @@ namespace lesson
             {
                 mainDataGridView.Rows.Clear();
                 btnAddPet.Enabled = false;
+                btnEditPet.Enabled = false;
+                btnDelPet.Enabled = false;
             }
         }
-    }
 
-    class ComboBoxClient
-    {
-        public string text { get; set; }
-        public int value { get; set; }
+        private void mainDataGridView_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            btnEditPet.Enabled = true;
+            btnDelPet.Enabled = true;
+        }
+
+        private async void btnAddPet_Click(object sender, EventArgs e)
+        {
+            if (comboClients.SelectedItem is Client selectedCilent)
+            {
+                PetForm petForm = new PetForm(selectedCilent.client_id);
+                
+                if (petForm.ShowDialog() == DialogResult.OK)
+                {
+                    await LoadClientsAsync();
+                }
+            }
+        }
     }
 }
