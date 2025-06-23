@@ -30,7 +30,7 @@
         {
             this.PetPanel = new System.Windows.Forms.Panel();
             this.btnAddPetClose = new System.Windows.Forms.Button();
-            this.btnAddPetSave = new System.Windows.Forms.Button();
+            this.btnPetSave = new System.Windows.Forms.Button();
             this.petBirthdayInput = new System.Windows.Forms.DateTimePicker();
             this.comboSex = new System.Windows.Forms.ComboBox();
             this.comboBreed = new System.Windows.Forms.ComboBox();
@@ -49,7 +49,7 @@
             this.PetPanel.BackColor = System.Drawing.Color.White;
             this.PetPanel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.PetPanel.Controls.Add(this.btnAddPetClose);
-            this.PetPanel.Controls.Add(this.btnAddPetSave);
+            this.PetPanel.Controls.Add(this.btnPetSave);
             this.PetPanel.Controls.Add(this.petBirthdayInput);
             this.PetPanel.Controls.Add(this.comboSex);
             this.PetPanel.Controls.Add(this.comboBreed);
@@ -76,19 +76,20 @@
             this.btnAddPetClose.UseVisualStyleBackColor = true;
             this.btnAddPetClose.Click += new System.EventHandler(this.btnAddPetClose_Click);
             // 
-            // btnAddPetSave
+            // btnPetSave
             // 
-            this.btnAddPetSave.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnAddPetSave.Location = new System.Drawing.Point(66, 429);
-            this.btnAddPetSave.Name = "btnAddPetSave";
-            this.btnAddPetSave.Size = new System.Drawing.Size(115, 25);
-            this.btnAddPetSave.TabIndex = 10;
-            this.btnAddPetSave.Text = "Сохранить";
-            this.btnAddPetSave.UseVisualStyleBackColor = true;
-            this.btnAddPetSave.Click += new System.EventHandler(this.btnAddPetSave_Click);
+            this.btnPetSave.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnPetSave.Location = new System.Drawing.Point(66, 429);
+            this.btnPetSave.Name = "btnPetSave";
+            this.btnPetSave.Size = new System.Drawing.Size(115, 25);
+            this.btnPetSave.TabIndex = 10;
+            this.btnPetSave.Text = "Сохранить";
+            this.btnPetSave.UseVisualStyleBackColor = true;
+            this.btnPetSave.Click += new System.EventHandler(this.btnPetSave_Click);
             // 
             // petBirthdayInput
             // 
+            this.petBirthdayInput.Checked = false;
             this.petBirthdayInput.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.petBirthdayInput.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             this.petBirthdayInput.Location = new System.Drawing.Point(151, 273);
@@ -213,6 +214,6 @@
         private System.Windows.Forms.ComboBox comboPetType;
         private System.Windows.Forms.TextBox aliasInput;
         private System.Windows.Forms.Button btnAddPetClose;
-        private System.Windows.Forms.Button btnAddPetSave;
+        private System.Windows.Forms.Button btnPetSave;
     }
 }

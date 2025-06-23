@@ -141,5 +141,22 @@ namespace lesson
                 }
             }
         }
+
+        private async void btnEditPet_Click(object sender, EventArgs e)
+        {
+            if (comboClients.SelectedItem is Client selectedCilent)
+            {
+                int petId = Convert.ToInt32(mainDataGridView.SelectedRows[0].Cells["colId"].Value);
+                var selectedPet = selectedCilent.pets.FirstOrDefault(pet => pet.pet_id == petId);
+
+
+                PetForm petForm = new PetForm(selectedCilent.client_id, selectedPet);
+
+                if (petForm.ShowDialog() == DialogResult.OK)
+                {
+                    await LoadClientsAsync();
+                }
+            }
+        }
     }
 }

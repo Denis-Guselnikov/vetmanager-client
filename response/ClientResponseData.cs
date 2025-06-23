@@ -50,6 +50,6 @@ namespace lesson.response
         public string pet_type { get; set; }
         public string breed { get; set; }
         public string pet_type_title { get; set; }
-        public int pet_type_id { get; set; }
+        public int? pet_type_id { get; set; }
     }
 }

@@ -3,6 +3,8 @@ using lesson.request;
 using lesson.response;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
+using System.Linq;
 using System.Net.Http;
 using System.Text;
 using System.Text.Json;
@@ -17,29 +19,32 @@ namespace lesson
         private List<PetType> petTypes;
         private readonly HttpClient client = new HttpClient();
         private int ownerId;
+        private Pet pet;
 
-        public PetForm(int ownerId)
+        public PetForm(int ownerId): this(ownerId, null)
+        {
+
+        }
+
+        public PetForm(int ownerId, Pet pet)
         {
             InitializeComponent();
             this.ownerId = ownerId;
+            this.pet = pet;
+            this.Text = (pet != null) ? "Редактирование питомца" : "Добавление питомца";
         }
 
         private async void PetForm_Load(object sender, EventArgs e)
         {
             settings = new AppSettings().LoadSettingFromXml();
             await LoadPetType();
+            PrepareFieldsForAddNewPet();
 
-            comboSex.DataSource = new List<SexItem>
+            if (pet != null)
             {
-                new SexItem{name = "Самец", id = 1},
-                new SexItem{name = "Самка", id = 2},
-                new SexItem{name = "Неизвестно", id = 5}
-            };
-
-            comboPetType.DataSource = petTypes;
-            comboPetType.DisplayMember = "title";
-            comboPetType.ValueMember = "id";
-        }
+                PrepareFieldsForEditPet();
+            }
+        }        
 
         private void comboPetType_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -86,7 +91,48 @@ namespace lesson
             return client;
         }
 
-        private async void btnAddPetSave_Click(object sender, EventArgs e)
+        private void PrepareFieldsForEditPet()
+        {
+            aliasInput.Text = pet.alias;
+            comboPetType.SelectedValue = pet?.pet_type_id ?? -1;
+
+            var breedItems = comboBreed.Items.Cast<Breed>().ToList();
+            var selectedBreed = breedItems.FirstOrDefault(breed => breed.title == pet.breed);
+            comboBreed.SelectedValue = selectedBreed?.id ?? -1;
+
+            var sexItems = comboSex.Items.Cast<SexItem>().ToList();
+            var selectedSex = sexItems.FirstOrDefault(s => s.value == pet.sex);
+            comboSex.SelectedValue = selectedSex?.id ?? -1;
+
+            DateTime.TryParseExact(pet.birthday, "yyyy-MM-dd", CultureInfo.InvariantCulture, DateTimeStyles.None, out DateTime birthday);
+
+            if (birthday != DateTime.MinValue)
+            {
+                petBirthdayInput.Value = birthday;
+            }
+        }
+
+        private void PrepareFieldsForAddNewPet()
+        {
+            comboSex.DataSource = new List<SexItem>
+            {
+                new SexItem{name = "Самец", id = 1, value = "male"},
+                new SexItem{name = "Самка", id = 2, value = "female"},
+                new SexItem{name = "Неизвестно", id = 5, value = "unknown"}
+            };
+            comboSex.DisplayMember = "name";
+            comboSex.ValueMember = "id";
+            comboSex.SelectedIndex = -1;
+
+            comboPetType.DataSource = petTypes;
+            comboPetType.DisplayMember = "title";
+            comboPetType.ValueMember = "id";
+            comboPetType.SelectedIndex = -1;
+
+            comboBreed.SelectedIndex = -1;
+        }
+
+        private async void btnPetSave_Click(object sender, EventArgs e)
         {
             if (!ValidateInput(out string alias, out PetType petType, out Breed breed))
                 return;
@@ -149,11 +195,21 @@ namespace lesson
         {
             var json = JsonSerializer.Serialize(request);
             var content = new StringContent(json, Encoding.UTF8, "application/json");
-            string url = $"https://{settings.Domain}.vetmanager2.ru/rest/api/pet";
 
-            HttpResponseMessage response = await client.PostAsync(url, content);
+            string url = (pet?.pet_id > 0)
+                ? $"https://{settings.Domain}.vetmanager2.ru/rest/api/pet/{pet.pet_id}"
+                : $"https://{settings.Domain}.vetmanager2.ru/rest/api/pet";
 
+            try
+            {
+                HttpResponseMessage response = (pet?.pet_id > 0)
+                    ? await client.PutAsync(url, content)
+                    : await client.PostAsync(url, content);
 
+            } catch (Exception ex)
+            {
+                MessageBox.Show($"Ошибка: {ex.Message}", "Ошибка");
+            }
 
             return true;
         }

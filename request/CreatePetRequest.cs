@@ -14,6 +14,7 @@
     {
         public string name { get; set; }
         public int id { get; set; }
+        public string value { get; set; }
         public override string ToString()
         {
             return name;

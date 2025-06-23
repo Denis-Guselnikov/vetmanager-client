@@ -124,6 +124,7 @@
             this.btnEditPet.TabStop = false;
             this.btnEditPet.Text = "Редактировать";
             this.btnEditPet.UseVisualStyleBackColor = true;
+            this.btnEditPet.Click += new System.EventHandler(this.btnEditPet_Click);
             // 
             // btnDelPet
             // 
