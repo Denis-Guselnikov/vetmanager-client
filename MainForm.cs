@@ -1,12 +1,14 @@
 ﻿using lesson.helpers;
 using lesson.response;
 using System;
+using System.Collections.Generic;
+using System.Drawing;
+using System.Linq;
 using System.Net.Http;
+using System.Security.Policy;
 using System.Text.Json;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using System.Collections.Generic;
-using System.Linq;
 
 namespace lesson
 {
@@ -156,6 +158,47 @@ namespace lesson
                 {
                     await LoadClientsAsync();
                 }
+            }
+        }
+
+        private void btnDelPet_Click(object sender, EventArgs e)
+        {
+            var confirmMessage = MessageBox.Show(
+                "Вы уверены, что хотите удалить этого питомца?",
+                "Подтверждение удаления",
+                MessageBoxButtons.YesNo
+            );
+
+            if (confirmMessage == DialogResult.Yes)
+            {
+                int petId = Convert.ToInt32(mainDataGridView.SelectedRows[0].Cells["colId"].Value);
+                Delete(petId);
+            }            
+        }
+
+        private async void Delete(int petId)
+        {
+            var client = CreateClient(settings);
+            string url = $"https://{settings.Domain}.vetmanager2.ru/rest/api/pet/{petId}";
+
+            try
+            {
+                HttpResponseMessage response = await client.DeleteAsync(url);
+
+                if (response.IsSuccessStatusCode)
+                {
+                    MessageBox.Show("Питомец успешно удалён.");
+                    await LoadClientsAsync();
+                }
+                else
+                {
+                    string error = await response.Content.ReadAsStringAsync();
+                    MessageBox.Show($"Ошибка при удалении: {error}", "Ошибка");
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Ошибка: {ex.Message}", "Ошибка");
             }
         }
     }

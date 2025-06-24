@@ -21,7 +21,7 @@ namespace lesson
         private int ownerId;
         private Pet pet;
 
-        public PetForm(int ownerId): this(ownerId, null)
+        public PetForm(int ownerId) : this(ownerId, null)
         {
 
         }
@@ -44,7 +44,7 @@ namespace lesson
             {
                 PrepareFieldsForEditPet();
             }
-        }        
+        }
 
         private void comboPetType_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -206,7 +206,8 @@ namespace lesson
                     ? await client.PutAsync(url, content)
                     : await client.PostAsync(url, content);
 
-            } catch (Exception ex)
+            }
+            catch (Exception ex)
             {
                 MessageBox.Show($"Ошибка: {ex.Message}", "Ошибка");
             }

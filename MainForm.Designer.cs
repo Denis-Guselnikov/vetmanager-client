@@ -136,6 +136,7 @@
             this.btnDelPet.TabIndex = 10;
             this.btnDelPet.Text = "Удалить";
             this.btnDelPet.UseVisualStyleBackColor = true;
+            this.btnDelPet.Click += new System.EventHandler(this.btnDelPet_Click);
             // 
             // mainDataGridView
             // 
